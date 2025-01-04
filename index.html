@@ -152,7 +152,7 @@
       .then(data => {
         console.log('API Response:', data);
 
-        const resumeData = data.body;
+        const resumeData = JSON.parse(data.body);
         console.log('Resume Data:', resumeData.basics.name);
 
         if (resumeData.basics.name) document.getElementById('name').innerText = resumeData.basics.name;
