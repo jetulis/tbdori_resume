@@ -16,27 +16,27 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.12'  # Specify the Python version you need
+          python-version: '3.12'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install boto3  # Install boto3 if your script requires it
+          pip install boto3
+
+      - name: Install AWS CLI v3
+        run: |
+          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv3.zip"
+          unzip awscliv3.zip
+          sudo ./aws/install --update
+          aws --version
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1  # Change to your bucket's region
-    
-     # Run your Python script if needed
-
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli
+          aws-region: us-east-1
 
       - name: Sync files to S3
         run: |
-          aws s3 sync . s3://tbdori-resume --delete
+          aws s3 sync . s3://tbdori-resume --delete --exclude ".github/*" --exclude ".git/*"
