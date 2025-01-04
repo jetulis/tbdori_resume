@@ -251,8 +251,15 @@
 
         if (resumeData.volunteer) {
           const volunteer = resumeData.volunteer;
+          console.log('Volunteer:', volunteer);
           const volunteerContainer = document.getElementById('volunteer');
-          volunteerContainer.innerHTML = `<strong>${volunteer.organization ?? ''}</strong> - ${volunteer.position ?? ''} (${volunteer.startDate ?? ''} - ${volunteer.endDate ?? ''})`;
+
+          volunteer.forEach(cert => {
+            const li = document.createElement('li');
+            li.innerHTML =  `<strong>${volunteer.organization ?? ''}</strong> - ${volunteer.position ?? ''} (${volunteer.startDate ?? ''} - ${volunteer.endDate ?? ''})`;
+            volunteerContainer.appendChild(li);
+          });
+           
         }
       })
       .catch(error => {
