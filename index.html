@@ -254,9 +254,9 @@
           console.log('Volunteer:', volunteer);
           const volunteerContainer = document.getElementById('volunteer');
 
-          volunteer.forEach(cert => {
+          volunteer.forEach(vol => {
             const li = document.createElement('li');
-            li.innerHTML =  `<strong>${volunteer.organization ?? ''}</strong> - ${volunteer.position ?? ''} (${volunteer.startDate ?? ''} - ${volunteer.endDate ?? ''})`;
+            li.innerHTML =  `<strong>${vol.organization ?? ''}</strong> - ${vol.position ?? ''} (${vol.startDate ?? ''} - ${vol.endDate ?? ''})`;
             volunteerContainer.appendChild(li);
           });
            
