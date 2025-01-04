@@ -155,18 +155,21 @@
         const resumeData = data;
         console.log('Resume Data:', resumeData);
 
-        if (resumeData.name) document.getElementById('name').innerText = resumeData.basics.name;
-        if (resumeData.label) document.getElementById('label').innerText = resumeData.basics.label;
-        if (resumeData.location) {
+        if (resumeData.basics.name) document.getElementById('name').innerText = resumeData.basics.name;
+
+        console.log('Resume Data:', resumeData.basics);
+        
+        if (resumeData.basics.label) document.getElementById('label').innerText = resumeData.basics.label;
+        if (resumeData.basics.location) {
           const location = resumeData.basics.location;
           document.getElementById('location').innerText = `${location.city ?? ''}, ${location.region ?? ''}, ${location.countryCode ?? ''}`;
         }
-        if (resumeData.email) document.getElementById('email').innerText = resumeData.basics.email;
-        if (resumeData.phone) document.getElementById('phone').innerText = resumeData.basics.phone;
+        if (resumeData.basics.email) document.getElementById('email').innerText = resumeData.basics.email;
+        if (resumeData.basics.phone) document.getElementById('phone').innerText = resumeData.basics.phone;
 
         const profilesContainer = document.getElementById('profiles');
-        if (resumeData.profiles) {
-          resumeData.profiles.forEach(profile => {
+        if (resumeData.basics.profiles) {
+          resumeData.basics.profiles.forEach(profile => {
             if (profile.url && profile.network) {
               const a = document.createElement('a');
               a.href = profile.url;
